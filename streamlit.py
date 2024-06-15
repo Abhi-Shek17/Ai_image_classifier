@@ -3,7 +3,7 @@ from PIL import Image
 import torch
 import numpy as np
 from torchvision import transforms
-
+import torch.nn as nn
 # Define custom CSS for the background, title, and caption
 st.markdown(
     """
