@@ -71,6 +71,7 @@ def load_model():
 @st.cache_data
 def predict(img):
     model=load_model()
+    st.write('mc kaam hogya')
     transform = transforms.Compose([
         transforms.Resize(size=(512, 512)),
         transforms.ToTensor()
