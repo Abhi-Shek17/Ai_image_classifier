@@ -3,7 +3,7 @@ from PIL import Image
 import torch
 import numpy as np
 from torchvision import transforms
-
+import os
 # Define custom CSS for the background, title, and caption
 st.markdown(
     """
@@ -65,8 +65,11 @@ st.markdown(
 )
 
 @st.cache_resource
+model_path='checkpoint.pth'
 def load_model():
-    return torch.load('https://github.com/Abhi-Shek17/Ai_image_classifier/blob/ce808e23fddecd8239d30cbc2244fd978fc2fa84/checkpoint.pth', map_location=torch.device('cpu'))
+    if os.path.exists(model_path):
+        st.write("found model")
+    return torch.load('', map_location=torch.device('cpu'))
 
 @st.cache_data
 def predict(img):
