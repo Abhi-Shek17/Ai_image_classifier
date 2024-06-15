@@ -66,7 +66,7 @@ st.markdown(
 model_path='checkpoint.pth'
 # @st.cache_resource
 def load_model():
-    if os.path.exists(model_path,map):
+    if os.path.exists(model_path):
         st.write("found model")
     return torch.load(model_path,map_location=torch.device('cpu'))
 
