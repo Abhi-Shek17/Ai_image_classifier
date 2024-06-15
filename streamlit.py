@@ -63,14 +63,14 @@ st.markdown(
     """,
     unsafe_allow_html=True
 )
-model_path='checkpoint.pth'
-@st.cache_resource
+# model_path='checkpoint.pth'
+# @st.cache_resource
 def load_model():
     if os.path.exists(model_path):
         st.write("found model")
     return torch.load(model_path)
 
-@st.cache_data
+# @st.cache_data
 def predict(img):
     model=load_model()
     transform = transforms.Compose([
