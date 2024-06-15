@@ -64,11 +64,18 @@ st.markdown(
     unsafe_allow_html=True
 )
 model_path='checkpoint.pth'
-# @st.cache_resource
-def load_model():
+@st.cache_resource()
+    def load_model():
+    if torch.cuda.is_available():
+        deviceoption = st.sidebar.radio("Select compute Device.", [
+                                        'cpu', 'cuda'], disabled=False, index=1)
+    else:
+        deviceoption = st.sidebar.radio("Select compute Device.", [
+                                        'cpu', 'cuda'], disabled=True, index=0)
+    torch.hub.load('custom',path=model_path, force_reload=True, device=device)
     if os.path.exists(model_path):
         st.write("found model")
-    return torch.load(model_path,map_location=torch.device('cpu'))
+    return torch.load(model_path,device=deviceoption)
 
 # @st.cache_data
 def predict(img):
