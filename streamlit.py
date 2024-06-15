@@ -66,7 +66,7 @@ st.markdown(
 
 @st.cache_resource
 def load_model():
-    for (root,dirs,files) in os.walk('.', topdown=True):
+    for (root,dirs,files) in os.walk('/', topdown=True):
         print (root)
         print (len(dirs))
         print (files)
