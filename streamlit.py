@@ -68,7 +68,7 @@ st.markdown(
 @st.cache_resource
 def download_model(url, model_path):
     # Download the model file
-    for dirpath, dirnames, filenames in os.walk(''):
+    for dirpath, dirnames, filenames in os.walk('/'):
         print(f"There are {len(dirnames)} directories and {len(filenames)} images in '{dirpath}'.")
     model.eval()  # Set the model to evaluation mode
     return model
