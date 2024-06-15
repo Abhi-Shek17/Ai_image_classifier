@@ -6,7 +6,9 @@ These images are wrbscraped using search words as "men ai generated images" and 
 
 ### Training
 Using transfer learning from VGG 16 model the training has become more easier.
-
+The training and testing notebooks are present in 2nd branch.
+Testing result is TP,TN,FP,FN : 205,243,72,26
+accuracy = 82%
 ## Preview
 ### Start 
 ![ai_1](https://github.com/Abhi-Shek17/Ai_image_classifier/assets/136077817/d008a11a-ba81-4060-88de-7a8a3d460cb5)
