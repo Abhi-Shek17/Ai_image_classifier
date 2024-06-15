@@ -2,6 +2,5 @@ tensorflow
 torchvision
 Pillow
 numpy
-base64
 streamlit
 io
