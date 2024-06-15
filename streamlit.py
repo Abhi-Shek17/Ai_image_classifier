@@ -89,7 +89,7 @@ def predict(img, model):
     return output
 
 # Define the URL to the model file on GitHub
-model_url = 'https://github.com/Abhi-Shek17/Ai_image_classifier/blob/d7923361c677ff67b47c1f9320bc1660c2764981/checkpoint.pth'
+model_url = 'https://github.com/Abhi-Shek17/Ai_image_classifier/tree/main/checkpoint.py'
 model_path = 'model.pth'
 
 # Download and load the model
