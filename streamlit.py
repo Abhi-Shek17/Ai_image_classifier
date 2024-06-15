@@ -64,10 +64,13 @@ st.markdown(
     unsafe_allow_html=True
 )
 
+@st.cache_resource
+def load_model():
+    return torch.load('checkpoint.pth', map_location=torch.device('cpu'))
 
 @st.cache_data
 def predict(img):
-    model = torch.load('checkpoint.pth', map_location=torch.device('cpu'))
+    model=load_model()
     transform = transforms.Compose([
         transforms.Resize(size=(512, 512)),
         transforms.ToTensor()
