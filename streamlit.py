@@ -1,9 +1,10 @@
 import streamlit as st
 from PIL import Image
 import torch
-import numpy as np
 from torchvision import transforms
+import requests
 import os
+
 # Define custom CSS for the background, title, and caption
 st.markdown(
     """
@@ -63,43 +64,58 @@ st.markdown(
     """,
     unsafe_allow_html=True
 )
-model_path='checkpoint.pth'
-@st.cache_resource()
-def load_model():
-    if os.path.exists(model_path):
-        st.write("found model")
-    return torch.load(model_path,map_location='cpu')
 
-# @st.cache_data
-def predict(img):
-    model=torch.load(model_path,map_location='cpu')
+@st.cache_resource
+def download_model(url, model_path):
+    # Download the model file
+    response = requests.get(url)
+    with open(model_path, 'wb') as f:
+        f.write(response.content)
+    # Load the model
+    model = torch.load(model_path, map_location=torch.device('cpu'))
+    model.eval()  # Set the model to evaluation mode
+    return model
+
+@st.cache_data
+def predict(img, model):
+    # Define the transformations
     transform = transforms.Compose([
         transforms.Resize(size=(512, 512)),
         transforms.ToTensor()
     ])
+    # Open the image and apply the transformations
     pil_image = Image.open(img).convert("RGB")
     img_tensor = transform(pil_image)
-    return model(img_tensor.unsqueeze(dim=0))
+    # Perform the prediction
+    with torch.no_grad():
+        output = model(img_tensor.unsqueeze(dim=0))
+    return output
 
+# Define the URL to the model file on GitHub
+model_url = 'https://github.com/yourusername/yourrepo/raw/main/model.pth'
+model_path = 'model.pth'
+
+# Download and load the model
+model = download_model(model_url, model_path)
+
+# File uploader to allow users to upload images
 img = st.file_uploader("Input your image", type=['jpg', 'png'])
 class_name = ['AI generated image', 'Real image']
 
 if img is not None:
-    col1,col2 = st.columns(2)
-    with col1:
-        st.image(img)
-    with col2:
-        idx = torch.argmax(predict(img))
-        string = class_name[idx]
-    
-    # Display image and caption
-        st.markdown(
-            f"""
-            <div class="image-container">
-                <div class="caption-container">
-                    <h2 class="caption" >{string}</h2>
-                </div>
+    # Make the prediction
+    idx = torch.argmax(predict(img, model)).item()
+    string = class_name[idx]
+    # Display the uploaded image
+    st.image(img)
+    # Display the prediction result as a caption
+    st.markdown(
+        f"""
+        <div class="image-container">
+            <div class="caption-container">
+                <h2 class="caption" >{string}</h2>
             </div>
-            """,
-            unsafe_allow_html=True
+        </div>
+        """,
+        unsafe_allow_html=True
     )
