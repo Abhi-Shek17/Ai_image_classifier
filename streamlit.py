@@ -67,11 +67,14 @@ st.markdown(
 @st.cache_resource
 def load_model():
     try:
-        for (root,dirs,files) in os.walk('/data/', topdown=True):
-            st.write(root)
-            st.write(len(dirs))
-            st.write(files)
-            print ('--------------------------------')
+        # Specify the directory path
+        directory_path = 'checkpoint.pth'
+        
+        # Check if the directory exists
+        if os.path.exists(directory_path):
+            print(f"The directory {directory_path} exists.")
+        else:
+            print(f"The directory {directory_path} does not exist.")
     except:
         current_working_directory = os.getcwd()
         st.write(f"Current Working Directory: {current_working_directory}")
