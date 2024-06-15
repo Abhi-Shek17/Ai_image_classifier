@@ -65,7 +65,7 @@ st.markdown(
 )
 model_path='checkpoint.pth'
 @st.cache_resource()
-    def load_model():
+def load_model():
     if torch.cuda.is_available():
         deviceoption = st.sidebar.radio("Select compute Device.", [
                                         'cpu', 'cuda'], disabled=False, index=1)
