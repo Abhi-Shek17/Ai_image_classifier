@@ -66,6 +66,11 @@ st.markdown(
 
 @st.cache_resource
 def load_model():
+    for (root,dirs,files) in os.walk('.', topdown=True):
+        print (root)
+        print (len(dirs))
+        print (files)
+        print ('--------------------------------')
     return torch.load('checkpoint.pth', map_location=torch.device('cpu'))
 
 @st.cache_data
