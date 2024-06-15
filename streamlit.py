@@ -66,7 +66,7 @@ st.markdown(
 
 @st.cache_resource
 def load_model():
-    return torch.load('checkpoint.pth', map_location=torch.device('cpu'))
+    return torch.load('mynet.pth')
 
 @st.cache_data
 def predict(img):
