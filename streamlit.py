@@ -64,9 +64,12 @@ st.markdown(
     unsafe_allow_html=True
 )
 
+@st.cache_resource
+def load_model():
+    return torch.load('checkpoint.pth', map_location=torch.device('cpu'))
+
 @st.cache_data
-def predict(img):
-    model = torch.load('checkpoint.pth', map_location=torch.device('cpu'))
+def predict(img, model):
     transform = transforms.Compose([
         transforms.Resize(size=(512, 512)),
         transforms.ToTensor()
@@ -79,8 +82,9 @@ img = st.file_uploader("Input your image", type=['jpg', 'png'])
 class_name = ['AI generated image', 'Real image']
 
 if img is not None:
+    model = load_model()
+    idx = torch.argmax(predict(img, model))
     string = class_name[idx]
-    idx = torch.argmax(predict(img))
     st.image(img)
     # Display image and caption
     st.markdown(
