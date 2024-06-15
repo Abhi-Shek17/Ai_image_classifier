@@ -66,10 +66,9 @@ st.markdown(
 model_path='checkpoint.pth'
 @st.cache_resource()
 def load_model():
-    torch.hub.load(path=model_path, force_reload=True, device='cpu')
     if os.path.exists(model_path):
         st.write("found model")
-    return torch.load(model_path,device=deviceoption)
+    return torch.load(model_path,map_location='cpu')
 
 # @st.cache_data
 def predict(img):
