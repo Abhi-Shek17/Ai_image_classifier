@@ -66,11 +66,15 @@ st.markdown(
 
 @st.cache_resource
 def load_model():
-    for (root,dirs,files) in os.walk('/data/', topdown=True):
-        st.write(root)
-        st.write(len(dirs))
-        st.write(files)
-        print ('--------------------------------')
+    try:
+        for (root,dirs,files) in os.walk('/data/', topdown=True):
+            st.write(root)
+            st.write(len(dirs))
+            st.write(files)
+            print ('--------------------------------')
+    except:
+        current_working_directory = os.getcwd()
+        st.write(f"Current Working Directory: {current_working_directory}")
     return torch.load('checkpoint.pth', map_location=torch.device('cpu'))
 
 @st.cache_data
