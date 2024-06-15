@@ -79,11 +79,11 @@ img = st.file_uploader("Input your image", type=['jpg', 'png'])
 class_name = ['AI generated image', 'Real image']
 
 if img is not None:
-    idx = torch.argmax(predict(img))
     string = class_name[idx]
 
     # Convert the uploaded image to base64
     pil_image = Image.open(img).convert("RGB")
+    idx = torch.argmax(predict(img))
     st.image(img)
     # Display image and caption
     st.markdown(
