@@ -68,8 +68,13 @@ st.markdown(
 @st.cache_resource
 def download_model(url, model_path):
     # Download the model file
-    for dirpath, dirnames, filenames in os.walk('/'):
-        print(f"There are {len(dirnames)} directories and {len(filenames)} images in '{dirpath}'.")
+    # Download the model file
+    response = requests.get(url)
+    response.raise_for_status()  # Ensure the request was successful
+    with open(model_path, 'wb') as f:
+        f.write(response.content)
+    # Load the model
+    model = torch.load(model_path, map_location=torch.device('cpu'))
     model.eval()  # Set the model to evaluation mode
     return model
 
