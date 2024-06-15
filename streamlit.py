@@ -3,7 +3,6 @@ from PIL import Image
 import torch
 import numpy as np
 from torchvision import transforms
-import io
 
 # Define custom CSS for the background, title, and caption
 st.markdown(
@@ -85,8 +84,6 @@ if img is not None:
 
     # Convert the uploaded image to base64
     pil_image = Image.open(img).convert("RGB")
-    buffer = io.BytesIO()
-    pil_image.save(buffer, format="PNG")
     st.image(img)
     # Display image and caption
     st.markdown(
