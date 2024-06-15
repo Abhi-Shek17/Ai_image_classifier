@@ -80,9 +80,6 @@ class_name = ['AI generated image', 'Real image']
 
 if img is not None:
     string = class_name[idx]
-
-    # Convert the uploaded image to base64
-    pil_image = Image.open(img).convert("RGB")
     idx = torch.argmax(predict(img))
     st.image(img)
     # Display image and caption
