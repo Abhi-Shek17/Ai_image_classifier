@@ -64,6 +64,7 @@ st.markdown(
     unsafe_allow_html=True
 )
 import torch.nn.functional as F
+@st.cache_resource()
 class MyNet(nn.Module):
     def __init__(self):
         super().__init__()
@@ -85,16 +86,18 @@ class MyNet(nn.Module):
         x = F.softmax(x, dim=1)
         return x
  
-# @st.cache_resource
+@st.cache_resource
 def load_model():
+    if st.session_state['model'] is not None:
+        return st.session_state['model']
     model =MyNet()
     model.load_state_dict(torch.load('mystatedic.pth'))
+    st.session_state['model']=model
     return model
 
 @st.cache_data
 def predict(img):
     model=load_model()
-    st.write('mc kaam hogya')
     transform = transforms.Compose([
         transforms.Resize(size=(512, 512)),
         transforms.ToTensor()
