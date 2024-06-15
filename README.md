@@ -1,6 +1,6 @@
 # AI or Real Image Classifier
 
-### Deployed link: [AI or Real Image Classifier](https://aiimageclassifier-6gxzsacc7er3gmeqky92m7.streamlit.app/)
+### Webpage link: [AI or Real Image Classifier](https://aiimageclassifier-6gxzsacc7er3gmeqky92m7.streamlit.app/)
 
 This repository contains code and resources for an image classifier project. The project is built using a machine learning model to classify images as either AI-generated or real.
 
