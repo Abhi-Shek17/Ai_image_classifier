@@ -72,9 +72,9 @@ def load_model():
         
         # Check if the directory exists
         if os.path.exists(directory_path):
-            print(f"The directory {directory_path} exists.")
+            st.write(f"The directory {directory_path} exists.")
         else:
-            print(f"The directory {directory_path} does not exist.")
+            st.write(f"The directory {directory_path} does not exist.")
     except:
         current_working_directory = os.getcwd()
         st.write(f"Current Working Directory: {current_working_directory}")
