@@ -66,7 +66,7 @@ st.markdown(
 
 @st.cache_resource
 def load_model():
-    return torch.load('abhi-shek17/ai_image_classifier/main/checkpoint.pth', map_location=torch.device('cpu'))
+    return torch.load('https://github.com/Abhi-Shek17/Ai_image_classifier/blob/ce808e23fddecd8239d30cbc2244fd978fc2fa84/checkpoint.pth', map_location=torch.device('cpu'))
 
 @st.cache_data
 def predict(img):
