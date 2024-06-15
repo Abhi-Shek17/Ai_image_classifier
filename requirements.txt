@@ -1,6 +1,6 @@
 tensorflow
 torchvision
-PIL
+Pillow
 numpy
 base64
 streamlit
