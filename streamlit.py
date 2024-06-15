@@ -64,7 +64,7 @@ st.markdown(
     unsafe_allow_html=True
 )
 import torch.nn.functional as F
-@st.cache_resource()
+@st.cache_data
 class MyNet(nn.Module):
     def __init__(self):
         super().__init__()
@@ -86,7 +86,7 @@ class MyNet(nn.Module):
         x = F.softmax(x, dim=1)
         return x
  
-@st.cache_resource
+@st.cache_data
 def load_model():
     if st.session_state['model'] is not None:
         return st.session_state['model']
