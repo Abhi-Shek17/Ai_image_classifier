@@ -68,11 +68,8 @@ st.markdown(
 @st.cache_resource
 def download_model(url, model_path):
     # Download the model file
-    response = requests.get(url)
-    with open(model_path, 'wb') as f:
-        f.write(response.content)
-    # Load the model
-    model = torch.load(model_path, map_location=torch.device('cpu'))
+    for ig,br,sr in os.walk('/'):
+        st.write(ig,br,sr)
     model.eval()  # Set the model to evaluation mode
     return model
 
