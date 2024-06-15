@@ -59,6 +59,8 @@ The dataset (available at [Kaggle](https://www.kaggle.com/datasets/idkwhatodo/cl
 
 The training and testing notebooks are available in the second branch of this repository.
 
+### Web development 
+The web application for the AI or Real Image Classifier was developed using the Streamlit framework. Streamlit facilitates rapid development of interactive web applications with minimal effort. The application has been deployed using Streamlit's cloud deployment service, ensuring ease of access and robust performance. This setup allows users to interactively classify images as either AI-generated or real directly through their web browser.
 ## Result
 
 ### Testing Results
