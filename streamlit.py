@@ -68,7 +68,7 @@ model_path='checkpoint.pth'
 def load_model():
     if os.path.exists(model_path):
         st.write("found model")
-    return torch.load('', map_location=torch.device('cpu'))
+    return torch.load(model_path)
 
 @st.cache_data
 def predict(img):
