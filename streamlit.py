@@ -87,7 +87,7 @@ class MyNet(nn.Module):
         return x
  
 def load_model():
-    if st.session_state['model'] is not None:
+    if 'model' in st.session_state :
         return st.session_state['model']
     model =MyNet()
     model.load_state_dict(torch.load('mystatedic.pth'))
