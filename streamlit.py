@@ -72,7 +72,7 @@ def load_model():
 
 # @st.cache_data
 def predict(img):
-    model=load_model()
+    model=torch.load(model_path,map_location='cpu')
     transform = transforms.Compose([
         transforms.Resize(size=(512, 512)),
         transforms.ToTensor()
@@ -85,17 +85,21 @@ img = st.file_uploader("Input your image", type=['jpg', 'png'])
 class_name = ['AI generated image', 'Real image']
 
 if img is not None:
-    idx = torch.argmax(predict(img))
-    string = class_name[idx]
-    st.image(img)
+    col1,col2 = st.columns(2)
+    with col1:
+        st.image(img)
+    with col2:
+        idx = torch.argmax(predict(img))
+        string = class_name[idx]
+    
     # Display image and caption
-    st.markdown(
-        f"""
-        <div class="image-container">
-            <div class="caption-container">
-                <h2 class="caption" >{string}</h2>
+        st.markdown(
+            f"""
+            <div class="image-container">
+                <div class="caption-container">
+                    <h2 class="caption" >{string}</h2>
+                </div>
             </div>
-        </div>
-        """,
-        unsafe_allow_html=True
+            """,
+            unsafe_allow_html=True
     )
