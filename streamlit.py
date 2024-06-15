@@ -66,22 +66,11 @@ st.markdown(
 
 @st.cache_resource
 def load_model():
-    try:
-        # Specify the directory path
-        directory_path = 'checkpoint.pth'
-        
-        # Check if the directory exists
-        if os.path.exists(directory_path):
-            st.write(f"The directory {directory_path} exists.")
-        else:
-            st.write(f"The directory {directory_path} does not exist.")
-    except:
-        current_working_directory = os.getcwd()
-        st.write(f"Current Working Directory: {current_working_directory}")
     return torch.load('checkpoint.pth', map_location=torch.device('cpu'))
 
 @st.cache_data
-def predict(img, model):
+def predict(img):
+    model=load_model()
     transform = transforms.Compose([
         transforms.Resize(size=(512, 512)),
         transforms.ToTensor()
@@ -94,18 +83,20 @@ img = st.file_uploader("Input your image", type=['jpg', 'png'])
 class_name = ['AI generated image', 'Real image']
 
 if img is not None:
-    model = load_model()
-    idx = torch.argmax(predict(img, model))
+    idx = torch.argmax(predict(img))
     string = class_name[idx]
-    st.image(img)
+    col1,col2 = st.columns(2)
+    with col1:
+        st.image(img)
     # Display image and caption
-    st.markdown(
-        f"""
-        <div class="image-container">
-            <div class="caption-container">
-                <h2 class="caption" >{string}</h2>
+    with col2:
+        st.markdown(
+            f"""
+            <div class="image-container">
+                <div class="caption-container">
+                    <h2 class="caption" >{string}</h2>
+                </div>
             </div>
-        </div>
-        """,
-        unsafe_allow_html=True
-    )
+            """,
+            unsafe_allow_html=True
+        )
