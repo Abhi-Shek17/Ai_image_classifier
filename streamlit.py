@@ -63,10 +63,33 @@ st.markdown(
     """,
     unsafe_allow_html=True
 )
-
-@st.cache_resource
+import torch.nn.functional as F
+class MyNet(nn.Module):
+    def __init__(self):
+        super().__init__()
+        self.conv1 = nn.Conv2d(3, 10, 3)
+        self.conv2 = nn.Conv2d(10, 20, 3)
+        self.pool = nn.MaxPool2d(2,2)
+        self.ada_pool = nn.AdaptiveAvgPool2d((10, 10))
+        self.fc1 = nn.LazyLinear(100)
+        self.fc2 = nn.Linear(100, 10)
+        self.fc3 = nn.Linear(10, 2)
+        
+    def forward(self, x):
+        x = self.pool(F.relu(self.conv1(x)))
+        x = self.ada_pool(F.relu(self.conv2(x)))
+        x = torch.flatten(x, 1)
+        x = F.relu(self.fc1(x))
+        x = F.relu(self.fc2(x))
+        x = self.fc3(x)
+        x = F.softmax(x, dim=1)
+        return x
+ 
+# @st.cache_resource
 def load_model():
-    return torch.load('mynet.pth')
+    model =MyNet()
+    model.load_state_dict(torch.load('mystatedic.pth')
+    return model
 
 @st.cache_data
 def predict(img):
