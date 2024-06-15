@@ -88,7 +88,7 @@ class MyNet(nn.Module):
 # @st.cache_resource
 def load_model():
     model =MyNet()
-    model.load_state_dict(torch.load('mystatedic.pth')
+    model.load_state_dict(torch.load('mystatedic.pth'))
     return model
 
 @st.cache_data
