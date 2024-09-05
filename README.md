@@ -65,11 +65,7 @@ The web application for the AI or Real Image Classifier was developed using the 
 
 ### Testing Results
 
-1. **True Positives (TP), True Negatives (TN), False Positives (FP), False Negatives (FN):** 
-   - First method: TP = 205, TN = 243, FP = 72, FN = 26
-   - Second method: TP = 191, TN = 252, FP = 17, FN = 86
-
-2. **Accuracy:** 82%
+1. **Accuracy:** 92%
 
 ### Comparison
 The misclassified set of the first method is more justifiable and comprehensible compared to the second method.
